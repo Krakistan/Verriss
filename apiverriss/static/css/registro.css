@@ -1,0 +1,104 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6A0DAD, #FFD700);
+    font-family: cursive, sans-serif;
+  }
+  
+  section {
+    position: relative;
+    max-width: 400px;
+    background-color: transparent;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(55px);
+    padding: 2rem 3rem;
+    width: 100%;
+  }
+  
+  .titulo {
+    color: #f4f4f4;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .inputbox {
+    position: relative;
+    margin: 15px 0;
+    width: 100%;
+    border-bottom: 2px solid #ffffff;
+  }
+  
+  .inputbox input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 10px 5px;
+    color: #fff;
+    background: none;
+  }
+  
+  .inputbox label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.5s ease;
+
+  }
+  
+  input:focus ~ label,
+  input:valid ~ label {
+    top: -10px;
+    font-size: 0.85rem;
+  }
+  
+  .boton {
+    width: 100%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: all 0.4s ease;
+    border: none;
+    outline: none;
+  }
+  
+  .boton:hover {
+    background-color: #6A0DAD;
+  }
+  
+  .register {
+    font-size: 0.9rem;
+    color: #f4f4f4;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .register a {
+    color: #f9f9f9;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .register a:hover {
+    text-decoration: underline;
+  }
+  

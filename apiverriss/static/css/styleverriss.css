@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Oculta el scroll horizontal */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* Centra todo horizontalmente */
+    padding: 0 15px; /* Espaciado interno */
+}
+
+.row {
+    display: flex;
+    justify-content: space-between; /* Espaciado uniforme */
+    align-items: center; /* Alineación vertical */
+    margin: 0 auto;
+}
+
+.col-md-6 {
+    flex: 0 0 48%; /* Cada columna ocupa el 48% */
+    max-width: 48%;
+}
+
+.formulario-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.eventos-scroll {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px 10px;
+    border-radius: 20px;
+    background-color: #0dbfcc;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #0c7c84;
+}
+
+
+
+
+
+
+footer {
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+}
+
+.footer .row {
+    margin: 0 auto;
+    max-width: 1200px; /* Ajustar ancho máximo */
+}
+
+.footer p, .footer ul {
+    margin: 0;
+    padding: 0;
+}

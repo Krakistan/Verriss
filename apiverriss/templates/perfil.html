@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styleverriss.css' %}">
+    <title>Eventos | Verriss</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<style>
+    /* Contenedor general del formulario */
+    .formulario-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 600px;
+        /* Ajustamos el ancho máximo */
+        height: 300px;
+        /* Igualamos la altura a los otros contenedores */
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        gap: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Contenedores izquierda y derecha */
+    .contenedor {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 48%;
+        /* Cada contenedor ocupa el 48% del ancho */
+    }
+
+    /* Estilo general de inputs, textarea y select */
+    .inputbox {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .inputbox label {
+        font-size: 12px;
+        /* Reducimos el tamaño del texto */
+        font-weight: bold;
+        color: #666;
+    }
+
+    .inputbox input,
+    .inputbox select,
+    .inputbox textarea {
+        width: 100%;
+        padding: 8px;
+        /* Reducimos el padding */
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: #ffffff;
+        font-size: 12px;
+        /* Reducimos el tamaño del texto */
+        outline: none;
+        transition: 0.3s ease;
+    }
+
+    .inputbox input:focus,
+    .inputbox select:focus,
+    .inputbox textarea:focus {
+        border-color: #0dbfcc;
+        box-shadow: 0px 0px 5px rgba(13, 191, 204, 0.5);
+    }
+
+    /* Campo de imagen como cuadrado pequeño */
+    .inputbox input[type="file"] {
+        height: 80px;
+        /* Reducimos el tamaño del campo de imagen */
+        width: 100%;
+        /* Ajusta al ancho del contenedor */
+        border: 2px dashed #ccc;
+        padding: 0;
+        text-align: center;
+        font-size: 10px;
+        /* Reducimos el texto */
+        color: #666;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: border-color 0.3s ease;
+    }
+
+    .inputbox input[type="file"]:hover {
+        border-color: #0dbfcc;
+    }
+
+    /* Botón del formulario */
+    .botonguardar {
+        padding: 10px;
+        /* Reducimos el tamaño del botón */
+        background-color: #0dbfcc;
+        color: white;
+        font-size: 14px;
+        /* Reducimos el tamaño del texto */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        align-self: flex-start;
+        /* Botón alineado a la izquierda */
+    }
+
+    .botonguardar:hover {
+        background-color: #0c7c84;
+        transform: translateY(-2px);
+    }
+
+    /* Ajustes responsivos para pantallas pequeñas */
+    @media (max-width: 768px) {
+        .formulario-container {
+            flex-direction: column;
+            height: auto;
+            /* Permitir altura dinámica */
+        }
+
+        .contenedor {
+            width: 100%;
+        }
+    }
+
+
+    /* Otros estilos que no deben tocarse */
+    .eventos-scroll {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        height: 300px;
+        /* Ajustar altura uniforme */
+        overflow-y: auto;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        height: 100%;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+
+
+    p {
+        font-size: 1rem;
+        color: #888;
+    }
+
+    section {
+        height: 100%;
+        /* 100% de la altura de la ventana */
+        display: flex;
+        /* Asegura que el contenido se alinee correctamente */
+        align-items: center;
+        /* Opcional: centra verticalmente */
+        justify-content: center;
+        /* Opcional: centra horizontalmente */
+        background-color: #f0f0f0;
+        /* Opcional: color de fondo */
+    }
+</style>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg animated-border py-3">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <div>
+                        <h2 class="titulo-p mb-0">Verris</h2>
+                        <h6 class="mb-0">Fehusentinel.ltda</h6>
+                    </div>
+                </a>
+
+               
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                    <li>
+                        <button 
+                            style="
+                                background-image: url('../../apiverriss/static/images/cerrar-sesion-de-usuario.png ');    
+                                background-position: center; /* Centra la imagen */
+                                background-repeat: no-repeat; /* Evita que la imagen se repita */
+                                width: 40px; /* Tamaño del botón */
+                                height: 40px;
+                                border: none; /* Sin bordes */
+                                border-radius: 15%; /* Botón circular */
+                                cursor: pointer; /* Cambia el cursor a mano al pasar sobre el botón */
+                                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para un mejor estilo */
+                                transition: transform 0.2s ease, box-shadow 0.2s ease; /* Suaviza el hover */
+                            " 
+                            onclick="window.location.href='/cerrar-sesion/'" 
+                            title="Cerrar Sesión">
+                        </button>
+                    </li>
+                </ul>
+                
+                
+            </div>
+        </nav>
+    </header>
+
+    <section>
+        <div class="container mt-5">
+            <!-- Fila superior -->
+            <div class="row mb-5">
+                <!-- Eventos Públicos (Arriba, izquierda) -->
+                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center border rounded">
+                    <h2 class="text-center mb-4">Eventos Públicos</h2>
+                    <div class="eventos-scroll w-100 p-3" id="eventos-publicos">
+                        <!-- Eventos Públicos cargados dinámicamente -->
+                        <p class="text-center text-muted">No hay eventos públicos disponibles.</p>
+                    </div>
+                </div>
+
+                <!-- Eventos Privados (Arriba, derecha) -->
+                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center border rounded">
+                    <h2 class="text-center mb-4">Eventos Privados</h2>
+                    <div class="eventos-scroll w-100 p-3" id="eventos-privados">
+                        <!-- Eventos Privados cargados dinámicamente -->
+                        <p class="text-center text-muted">No tienes eventos privados disponibles.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fila inferior -->
+            <div class="row mb-5">
+
+
+                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center border rounded">
+                    <div class="inputbox">
+                        <label for="titulo">Título del Evento</label>
+                        <input type="text" id="titulo" required>
+                    </div>
+                        <form id="crearEventoFormJS" class="eventos-scroll w-100 p-3">
+                            <div class="contenedor izquierda">
+                                <div class="inputbox">
+                                    <label for="imagen">Imagen</label>
+                                    <input type="file" id="imagen">
+                                </div>
+                                <div class="inputbox">
+                                    <label for="ubicacion">Ubicación</label>
+                                    <input type="text" id="ubicacion" required>
+                                </div>
+                                <div class="inputbox">
+                                    <label for="privacidad">Privacidad</label>
+                                    <select id="privacidad" required>
+                                        <option value="publico">Público</option>
+                                        <option value="privado">Privado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="contenedor derecha">
+
+                                <div class="inputbox">
+                                    <label for="fecha_hora">Fecha y Hora</label>
+                                    <input type="datetime-local" id="fecha_hora" required>
+                                </div>
+                                <div class="inputbox">
+                                    <label for="precio_entrada">Precio de Entrada</label>
+                                    <input type="number" id="precio_entrada">
+                                </div>
+                                <div class="inputbox">
+                                    <label for="descripcion">Descripción</label>
+                                    <textarea id="descripcion" rows="2" required></textarea>
+                                </div>
+                                <button class="botonguardar"  type="button" onclick="crearEvento()">Guardar Evento</button>
+                            </div>
+                        </form>
+                    
+
+
+                </div>
+                <!-- Formulario para crear evento (Abajo, izquierda) -->
+
+                <!-- Mis Eventos (Abajo, derecha) -->
+                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center border rounded">
+                    <h2 class="text-center mb-4">Mis Eventos</h2>
+                    <div class="eventos-scroll w-100 p-3" id="eventos-creados">
+                        <!-- Eventos creados cargados dinámicamente -->
+                        <p class="text-center text-muted">Aún no has creado ningún evento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <hr class="separador-eventos">
+
+    <footer>
+        <div class="row footer mt-5">
+            <div class="col-md-6">
+                <p>Copyright © 2024 Fehusentinel.ltda All rights reserved.</p>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-inline text-end">
+                    <li class="list-inline-item"><a href="#">Sobre Nosotros</a></li>
+                    <li class="list-inline-item"><a href="#">Contacto</a></li>
+                    <li class="list-inline-item"><a href="#">Política de Privacidad</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+    <!-- Scripts para interactuar con la API -->
+    <script>
+        const API_URL = 'http://127.0.0.1:8000/api/eventos/';
+        const TOKEN = localStorage.getItem('token'); // Token almacenado después del inicio de sesión
+
+        // Cargar eventos públicos y privados
+        async function cargarEventos() {
+            try {
+                const response = await fetch(API_URL, {
+                    headers: {
+                        'Authorization': `Bearer ${TOKEN}`
+                    }
+                });
+                if (!response.ok) {
+                    alert('Error al cargar eventos. Inicia sesión nuevamente.');
+                    return;
+                }
+
+                const eventos = await response.json();
+
+                const publicos = document.getElementById('eventos-publicos');
+                const privados = document.getElementById('eventos-privados');
+
+                publicos.innerHTML = '';
+                privados.innerHTML = '';
+
+                eventos.forEach(evento => {
+                    const eventoHTML = `
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="${evento.imagen || '/static/images/default_evento.jpg'}" class="card-img-top" alt="${evento.titulo}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${evento.titulo}</h5>
+                                    <p class="card-text">${evento.descripcion}</p>
+                                    <p><strong>Fecha:</strong> ${new Date(evento.fecha_hora).toLocaleString()}</p>
+                                    <p><strong>Ubicación:</strong> ${evento.ubicacion}</p>
+                                </div>
+                            </div>
+                        </div>`;
+                    if (evento.privacidad === 'publico') {
+                        publicos.innerHTML += eventoHTML;
+                    } else {
+                        privados.innerHTML += eventoHTML;
+                    }
+                });
+            } catch (error) {
+                console.error('Error al cargar eventos:', error);
+                alert('Hubo un error al cargar los eventos.');
+            }
+        }
+
+        // Crear nuevo evento
+        async function crearEvento() {
+            const formData = new FormData();
+            formData.append('titulo', document.getElementById('titulo').value);
+            formData.append('ubicacion', document.getElementById('ubicacion').value);
+            formData.append('fecha_hora', document.getElementById('fecha_hora').value);
+            formData.append('descripcion', document.getElementById('descripcion').value);
+            formData.append('precio_entrada', document.getElementById('precio_entrada').value);
+            formData.append('privacidad', document.getElementById('privacidad').value);
+            const imagen = document.getElementById('imagen').files[0];
+            if (imagen) formData.append('imagen', imagen);
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${TOKEN}`
+                    },
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    alert('Evento creado con éxito');
+                    window.location.reload(); // Recargar la página para mostrar el nuevo evento
+                } else {
+                    alert('Error al crear el evento');
+                }
+            } catch (error) {
+                console.error('Error al crear el evento:', error);
+                alert('Hubo un error al crear el evento.');
+            }
+        }
+
+        // Cargar eventos al cargar la página
+        cargarEventos();
+    </script>
+
+</body>
+
+</html>
