@@ -79,15 +79,18 @@ WSGI_APPLICATION = 'nucleo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'Verriss', 
-        'ENFORCE_SCHEMA': False,  
+        'NAME': 'verriss',  # Reemplaza con el nombre de tu base de datos
         'CLIENT': {
-            'host': 'mongodb://localhost:27017',   
-            'authSource': 'admin',  
-            'authMechanism': 'SCRAM-SHA-256',  
-        },
+            'host': 'mongodb+srv://mongo:kSBEZVXuQzXqF1pOAnmwPXlPmGNRoVyG@mongohost',
+            'username': 'mongo',  # Usuario mostrado en Railway
+            'password': 'kSBEZVXuQzXqF1pOAnmwPXlPmGNRoVyG',  # Contraseña mostrada en Railway
+            'authSource': 'admin',  # Si aplica, para autenticación
+            'port': 27017,  # Puerto predeterminado de MongoDB
+        }
     }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
